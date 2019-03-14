@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>详情页</title>
+</head>
+<body>
+<table class="table table-striped">
+    <th>
+  <td>序号</td>
+      <td>创建时间</td>
+      <td>状态</td>
+      <td>内容</td>
+      <td>取消</td>
+      <td>完成</td>
+  <tr>
+
+    <td>{{ content.id }}</td>
+    <td>{{ content.issue_date }}</td>
+    {% if content.status == 0 %}
+    <td>未完成</td>
+    {% elif content.status == 1 %}
+    <td>完成</td>
+    {% endif %}
+    <td>{{content.text}}</td>
+
+    <td>
+      <a href="{% url 'todo:delete' content.id %}">取消</a>
+    </td>
+    <td>
+      <a href="{% url 'todo:redirect' content.id %}">完成</a>
+    </td>
+  </tr>
+
+</table>
+</body>
+</html>

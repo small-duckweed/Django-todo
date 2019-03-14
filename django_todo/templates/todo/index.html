@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+</head>
+<body>
+<table>
+  <form action="{% url 'todo:add' %}" method="post">
+    {% csrf_token %}
+{#  第一种提交  #}
+  <textarea rows=3 cols=50 placeholder="请输入待办事项" name="content"></textarea>
+        <input type="submit" value="提交">
+{#  第二种提交  #}
+{#    <input type="text" name="content" placeholder="请输入">#}
+{#  <button type="submit" style="height: 50px;">添加</button>#}
+{#  上面两种提交，如果没有input标签就会报错，好像是前端的语法  #}
+</form>
+  <th>
+    <td>序号</td>
+    <td>内容</td>
+    <td>状态</td>
+
+  </th>
+
+{% for c in content %}
+  <tr>
+    <td>{{c.id}}</td>
+    <td><a href="{% url 'todo:particulars' c.id%}">{{c.text}}</a></td>
+    {% if c.status == 0 %}
+    <td>未完成</td>
+    {% elif c.status == 1 %}
+    <td>完成</td>
+    {% endif %}
+  </tr>
+
+{% endfor %}
+</table>
+</body>
+</html>
